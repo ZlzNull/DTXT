@@ -1,0 +1,136 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-family: "sans-serif";
+	background: #34495e;
+}
+.box{
+	width: 30vw;
+	min-width: 200px;
+	padding: 4vw;
+	position: absolute;
+	margin-top: 20vh;
+	margin-left: 31vw;
+	background: #191919;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 8px;
+
+    transform: rotateX(-180deg);
+	backface-visibility: hidden;
+	transition: 0.5s;	
+}
+.box h1{
+	color: white;
+	text-transform: uppercase;
+	font-weight:  500;
+}
+.box input[type = "text"],.box input[type ="password"]{
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align:  center;
+	border: 2px solid #3498db;
+	padding: 14px 10px;
+	width: 20vw;
+	min-width: 140px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 0.25s;
+}
+.box input[type = "text"]:focus,.box input[type ="password"]:focus{
+	width: 26vw;
+	min-width: 174px;
+	border-color: #2ecc71;
+	border-radius: 12px;
+}
+.box input[type="submit"]{
+	background: none;
+	display: block;
+	margin: 20px auto;
+	text-align:  center;
+	border: 2px solid #2ecc71;
+	padding: 14px 40px;
+	outline: none;
+	color: white;
+	border-radius: 24px;
+	transition: 0.25s;
+	cursor: pointer;
+}
+.box input[type="submit"]:hover{
+	background: #2ecc71;
+	border-radius: 12px;
+}
+.start{
+	background: #191919;
+	width: 80px;
+	height: 80px;
+	border: 2px solid #2ecc71;
+	border-radius: 40px;
+	text-align: center;
+	margin-top: -40px;
+	margin-left: -40px;
+	
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	font-size: 24px;
+	font-weight: 200;
+	color: white;
+	transition: 1s;
+}
+.start:hover{
+	font-weight: 500;
+	background: #2ecc71;
+	transition: 0.5s;
+	border-radius: 20px;
+}
+
+.start:focus{
+	background: #2ecc71;
+	transition: 0.5s;
+	border-radius: 20px;
+	font-weight: 500;
+}
+
+.register{
+	transform: rotateY(180deg);
+	backface-visibility: hidden;
+	transition: 1s;
+}
+.forget{
+	transform: rotateY(180deg);
+	backface-visibility: hidden;
+	transition: 1s;
+}
+
+.btn{
+	background: #191919;
+	border: 2px solid #2ecc72;
+	border-radius: 20px;
+	padding: 5px;
+	color: white;
+	font-weight: 200;
+	
+}
+.btn:hover{
+	background: #2ECC71;
+	font-weight: 400;
+	transition: 0.5s;
+	border-radius: 10px;
+}
+/*
+.start h1{
+	color: white;
+	text-transform: uppercase;
+	padding-top: 22px;
+}
+*/
+
+/*
+.start h1:hover{
+	color: #2ecc71;
+	transition: 0.25s;
+}
+*/

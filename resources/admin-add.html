@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.2</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row">
+        <form class="layui-form">
+            <div class="layui-form-item layui-form-text">
+                <label for="username" class="layui-form-label"> <span class="x-red normal">*</span><span class="normal">题目</span>
+                </label>
+                <div class="layui-input-block">
+                    <textarea name="desc" placeholder="请输入题目。如是填空题，请在需要留空的地方用~替代" class="layui-textarea normal-small"
+                              lay-verify="question" id="question_title"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red normal">*</span><span
+                        class="normal">类型</span></label>
+                <div class="layui-input-block">
+                    <input type="radio" name="type" value="choose" lay-filter="type" title="选择题">
+                    <input type="radio" name="type" value="torf" lay-filter="type" title="判断题">
+                    <input type="radio" name="type" value="fill" lay-filter="type" title="填空题">
+                </div>
+            </div>
+            <div class="layui-form-item" id="option_a" style="display: none">
+                <label for="choose_a" class="layui-form-label"> <span class="x-red normal">*</span><span class="normal">A</span></label>
+                <div class="layui-input-inline">
+                    <input type="text" id="choose_a" name="choose" required="" lay-verify="choose_a"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" id="option_b" style="display: none">
+                <label for="choose_b" class="layui-form-label"> <span class="x-red normal">*</span><span class="normal">B</span></label>
+                <div class="layui-input-inline">
+                    <input type="text" id="choose_b" name="choose" required="" lay-verify="choose_b"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" id="option_c" style="display: none">
+                <label for="choose_c" class="layui-form-label"> <span class="x-red normal">*</span><span class="normal">C</span></label>
+                <div class="layui-input-inline">
+                    <input type="text" id="choose_c" name="choose" required="" lay-verify="choose_c"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" id="option_d" style="display: none">
+                <label for="choose_d" class="layui-form-label"> <span class="x-red normal">*</span><span class="normal">D</span></label>
+                <div class="layui-input-inline">
+                    <input type="text" id="choose_d" name="choose" required="" lay-verify="choose_d"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" id="choose_answer" style="display: none">
+                <label class="layui-form-label"><span class="x-red normal">*</span><span
+                        class="normal">答案</span></label>
+                <div class="layui-input-block" lay-verify="choose_answer">
+                    <input id="a" type="checkbox" name="type" value="A" lay-filter="option" title="A">
+                    <input id="b" type="checkbox" name="type" value="B" lay-filter="option" title="B">
+                    <input id="c" type="checkbox" name="type" value="C" lay-filter="option" title="C">
+                    <input id="d" type="checkbox" name="type" value="D" lay-filter="option" title="D">
+                </div>
+            </div>
+            <div class="layui-form-item" id="tOrf" style="display: none">
+                <label class="layui-form-label"><span class="x-red normal">*</span><span
+                        class="normal">答案</span></label>
+                <div class="layui-input-block" lay-verify="tOrf_answer">
+                    <input id="t" type="radio" name="type" value="true" lay-filter="tOrf" title="对">
+                    <input id="f" type="radio" name="type" value="false" lay-filter="tOrf" title="错">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text" id="fill" style="display: none">
+                <label for="username" class="layui-form-label"> <span class="x-red normal">*</span><span class="normal">答案</span>
+                </label>
+                <div class="layui-input-block">
+                    <textarea name="desc" id="fill_answer" placeholder="请输入答案，如有多个空，请以分号隔开。如一个空有多个答案，请以逗号隔开。"
+                              class="layui-textarea normal-small" lay-verify="fill_answer"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item" id="add" style="display: none">
+                <label for="L_repass" class="layui-form-label"> </label>
+                <button class="layui-btn" lay-filter="add" lay-submit="" id="add_btn">增加</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    layui.use(['form', 'layer', 'jquery'],
+        function () {
+            $ = layui.$;
+            var form = layui.form,
+                layer = layui.layer;
+
+            var type = "";
+            var title = "";
+            var answer = "";
+
+            function showChoose() {
+                $("#option_a").show();
+                $("#option_b").show();
+                $("#option_c").show();
+                $("#option_d").show();
+                $("#choose_answer").show();
+            }
+
+            function hideChoose() {
+                $("#option_a").hide();
+                $("#option_b").hide();
+                $("#option_c").hide();
+                $("#option_d").hide();
+                $("#choose_answer").hide();
+            }
+
+            function showTorF() {
+                $("#tOrf").show();
+            }
+
+            function hideTorF() {
+                $("#tOrf").hide();
+            }
+
+            function showFill() {
+                $("#fill").show();
+            }
+
+            function hideFill() {
+                $("#fill").hide();
+            }
+
+            form.verify({
+                question: function (value) {
+                    if (value.length < 1) {
+                        return '请输入题目';
+                    }
+                }
+            });
+
+            form.on('radio(type)', function (data) {
+                if (this.value === "choose") {
+                    console.log("This is Choose.");
+                    type = "choose";
+                    showChoose();
+                    hideFill();
+                    hideTorF();
+                    //自定义验证规则
+                    form.verify({
+                        choose_a: function (value) {
+                            if (value.length < 1) {
+                                return '请输入选项A';
+                            }
+                        },
+                        choose_b: function (value) {
+                            if (value.length < 1) {
+                                return '请输入选项B';
+                            }
+                        },
+                        choose_c: function (value) {
+                            if (value.length < 1) {
+                                return '请输入选项C';
+                            }
+                        },
+                        choose_d: function (value) {
+                            if (value.length < 1) {
+                                return '请输入选项D';
+                            }
+                        },
+                        choose_answer: function () {
+                            if (!a && !b && !c && !d) {
+                                return '请至少添加一个答案'
+                            }
+                        },
+                        pass: [/(.+){6,12}$/, '密码必须6到12位']
+                    });
+                } else if (this.value === "torf") {
+                    console.log("This is tOrf.");
+                    type = "torf";
+                    showTorF();
+                    hideChoose();
+                    hideFill();
+                    form.verify({
+                        tOrf_answer: function () {
+                            var t = document.getElementById("t").checked;
+                            var f = document.getElementById("f").checked;
+                            if (!t && !f) {
+                                return '请选择一个答案'
+                            }
+                        }
+                    });
+                } else {
+                    console.log("This is Fill.");
+                    type = "fill";
+                    showFill();
+                    hideChoose();
+                    hideTorF();
+                    form.verify({
+                        fill_answer: function (value) {
+                            if (value.length < 1) {
+                                return '请输入答案'
+                            }
+                        }
+                    });
+                }
+                $("#add").show();
+            });
+
+            $("#add_btn").click(function () {
+                var title = document.getElementById("question_title").value;
+                if (type === "choose") {
+                    answer = "";
+                    var a = document.getElementById("a").checked;
+                    var b = document.getElementById("b").checked;
+                    var c = document.getElementById("c").checked;
+                    var d = document.getElementById("d").checked;
+                    if (a) {
+                        answer += "A";
+                    }
+                    if (b) {
+                        answer += "B";
+                    }
+                    if (c) {
+                        answer += "C";
+                    }
+                    if (d) {
+                        answer += "D";
+                    }
+                    var json = {
+                        "title": title,
+                        "a": document.getElementById("choose_a").value,
+                        "b": document.getElementById("choose_b").value,
+                        "c": document.getElementById("choose_c").value,
+                        "d": document.getElementById("choose_d").value,
+                        "answer": answer
+                    };
+                    $.ajax({
+                        url: "https://127.0.0.1:443/question/add/choose",
+                        type: "POST",
+                        data: JSON.stringify(json),
+                        dataType: "json",
+                        success: function (data) {
+                            console.log("success");
+                            layer.alert("增加成功", {
+                                    icon: 6
+                                },
+                                function () {
+                                    //关闭当前frame
+                                    // xadmin.close();
+                                    window.location.reload();
+
+                                    // 可以对父窗口进行刷新
+                                    xadmin.father_reload();
+                                });
+                            return true;
+                        },
+                        error: function () {
+                            console.log("error");
+                            layer.alert("增加成功", {
+                                icon: 5
+                            });
+                            return false;
+                        }
+                    });
+                } else if (type === "torf") {
+                    var t = document.getElementById("t").checked;
+                    if (t) {
+                        answer = "true";
+                    } else {
+                        answer = "false";
+                    }
+                    var json = {
+                        "title": title,
+                        "answer": answer
+                    };
+                    $.ajax({
+                        url: "https://127.0.0.1:443/question/add/tOrf",
+                        type: "POST",
+                        data: JSON.stringify(json),
+                        dataType: "json",
+                        success: function (data) {
+                            console.log("success");
+                            layer.alert("增加成功", {
+                                    icon: 6
+                                },
+                                function () {
+                                    //关闭当前frame
+                                    // xadmin.close();
+                                    window.location.reload();
+
+                                    // 可以对父窗口进行刷新
+                                    xadmin.father_reload();
+                                });
+                            return true;
+                        },
+                        error: function () {
+                            console.log("error");
+                            layer.alert("增加成功", {
+                                icon: 5
+                            });
+                            return false;
+                        }
+                    });
+                } else {
+                    answer = document.getElementById("fill_answer").value;
+                    var json = {
+                        "title": title,
+                        "answer": answer
+                    };
+                    $.ajax({
+                        url: "https://127.0.0.1:443/question/add/fill",
+                        type: "POST",
+                        data: JSON.stringify(json),
+                        dataType: "json",
+                        success: function (data) {
+                            console.log("success");
+                            layer.alert("增加成功", {
+                                    icon: 6
+                                },
+                                function () {
+                                    //关闭当前frame
+                                    // xadmin.close();
+                                    window.location.reload();
+
+                                    // 可以对父窗口进行刷新
+                                    xadmin.father_reload();
+                                });
+                            return true;
+                        },
+                        error: function () {
+                            console.log("error");
+                            layer.alert("增加成功", {
+                                icon: 5
+                            });
+                            return false;
+                        }
+                    });
+                }
+                console.log(json);
+
+                return false;
+            })
+//
+            //监听提交
+//            form.on('submit(add)',
+//                function (data) {
+//                    console.log(data);
+//                    //发异步，把数据提交给php
+//                    layer.alert("增加成功", {
+//                            icon: 6
+//                        },
+//                        function () {
+//                            //关闭当前frame
+//                            xadmin.close();
+//
+//                            // 可以对父窗口进行刷新
+//                            xadmin.father_reload();
+//                        });
+//                    return false;
+//                });
+
+        });
+</script>
+</body>
+</html>
+<script>
+
+</script>
